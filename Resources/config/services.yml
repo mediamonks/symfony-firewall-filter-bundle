@@ -19,8 +19,3 @@ services:
     media_monks.guardian.logout_handler:
         abstract: true
         class: MediaMonks\SecurityBundle\Security\Http\Logout\LogoutFirewallHandler
-
-    my_test_listener:
-        class: MediaMonks\SecurityBundle\MyEventListener
-        tags:
-            - { name: 'guardian.admin'}
