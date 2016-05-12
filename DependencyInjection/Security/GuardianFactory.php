@@ -37,7 +37,11 @@ class GuardianFactory implements SecurityFactoryInterface
     public function addConfiguration(NodeDefinition $builder)
     {
         $builder
-
+            ->children()
+            ->arrayNode('handler')
+            ->info('An array of service ids for all of your "handlers"')
+            ->prototype('scalar')->end()
+            ->end()
         ;
     }
 
@@ -60,7 +64,7 @@ class GuardianFactory implements SecurityFactoryInterface
         $container->getDefinition(self::SYMFONY_LOGOUT_LISTENER . '.' . $id)
             ->addMethodCall('addHandler', [ new Reference($authLogoutId) ]);
 
-        $this->addForCompiler($container, $id);
+        $this->addForCompiler($container, $id, $config['handler']);
 
         return [
             $authProviderId,
@@ -69,14 +73,16 @@ class GuardianFactory implements SecurityFactoryInterface
         ];
     }
 
-    protected function addForCompiler(ContainerBuilder $builder, $id)
+    protected function addForCompiler(ContainerBuilder $builder, $id, $handlers)
     {
         $toMerge = [];
         if($builder->hasParameter(self::GUARDIAN_PARAMETER)){
             $toMerge = $builder->getParameter(self::GUARDIAN_PARAMETER);
         }
 
-        $builder->setParameter(self::GUARDIAN_PARAMETER, array_merge($toMerge, [$id]));
+        $toMerge[$id] = $handlers;
+
+        $builder->setParameter(self::GUARDIAN_PARAMETER, $toMerge);
     }
 
     public static function getFirewallListenerName($id)

@@ -23,18 +23,23 @@ class LoginFlowCompiler implements CompilerPassInterface
             return;
         }
 
-        foreach($container->getParameter(GuardianFactory::GUARDIAN_PARAMETER) as $firewall){
-            $this->processFirewall($container, $firewall);
+        foreach($container->getParameter(GuardianFactory::GUARDIAN_PARAMETER) as $firewall => $handlers){
+            $this->processFirewall($container, $firewall, $handlers);
         }
     }
 
-    protected function processFirewall(ContainerBuilder $container, $firewall)
+    protected function processFirewall(ContainerBuilder $container, $firewall, $handlers)
     {
         $login = $container->getDefinition(GuardianFactory::AUTH_CHECK_LISTENER);
         $check = $container->getDefinition(GuardianFactory::getFirewallListenerName($firewall));
         $logout = $container->getDefinition(GuardianFactory::getLogoutHandlerName($firewall));
 
-        $handlers = $container->findTaggedServiceIds('guardian.' . $firewall);
+        $handlers = array_flip($handlers);
+        array_walk($handlers, function(&$item, $key){
+            $item = [];
+        });
+
+        $handlers = array_merge($handlers, $container->findTaggedServiceIds('guardian.' . $firewall));
 
         foreach($handlers as $handler => $params){
             $this->processHandler(
