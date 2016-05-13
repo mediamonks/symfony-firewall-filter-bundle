@@ -8,7 +8,21 @@ Next to it **Guardian** listener was added, which provides some interesting func
 
 Aim of **Guardian** is to add 3 "hooks" related to login flow.
 
-On compilation process it looks for all services tagged with *guardian.firewall_name*.
+To enable Guardian for certain firewall:
+
+```
+    security:
+        firewall_foo:
+            guardian: ~
+            
+        firewall_bar:        
+            guardian:
+                handler:
+                    - bar_listener
+```
+
+Besides defining handlers in security configuration(**services ids**), developer can tag his services with *guardian.firewall_name*.
+They'll be processed and added to guardian flow via *CompilerPass* 
 
 ```
 my_test_listener:
