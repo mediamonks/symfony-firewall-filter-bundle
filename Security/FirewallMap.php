@@ -1,13 +1,13 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\Security;
+namespace MediaMonks\FirewallFilterBundle\Security;
 
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap as FirewallMapBase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class FirewallMap
- * @package MediaMonks\SecurityBundle\Security
+ * @package MediaMonks\FirewallFilterBundle\Security
  * @author pawel@mediamonks.com
  */
 class FirewallMap extends FirewallMapBase

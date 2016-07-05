@@ -1,7 +1,7 @@
 {
-  "name": "mediamonks/security-bundle",
+  "name": "mediamonks/firewall-filter",
   "type": "symfony-bundle",
-  "description": "MediaMonks Security Bundle",
+  "description": "MediaMonks Firewall Filter Bundle",
   "keywords": [
     "security"
   ],
@@ -27,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "MediaMonks\\SecurityBundle\\": ""
+      "MediaMonks\\FirewallFilterBundle\\": ""
     }
   }
 }

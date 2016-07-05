@@ -1,8 +1,8 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\Security\Http;
+namespace MediaMonks\FirewallFilterBundle\Security\Http;
 
-use MediaMonks\SecurityBundle\Security\FirewallMap;
+use MediaMonks\FirewallFilterBundle\Security\FirewallMap;
 use Symfony\Component\Security\Http\Firewall as FirewallBase;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class Firewall
- * @package MediaMonks\SecurityBundle\Security\Http
+ * @package MediaMonks\FirewallFilterBundle\Security\Http
  * @author pawel@mediamonks.com
  */
 class Firewall implements EventSubscriberInterface

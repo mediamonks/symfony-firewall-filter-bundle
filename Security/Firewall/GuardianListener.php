@@ -1,14 +1,14 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\Security\Firewall;
+namespace MediaMonks\FirewallFilterBundle\Security\Firewall;
 
-use MediaMonks\SecurityBundle\Security\LoginFlow\CheckAwareInterface;
+use MediaMonks\FirewallFilterBundle\Security\LoginFlow\CheckAwareInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 
 /**
  * Class GuardianListener
- * @package MediaMonks\SecurityBundle\Security\Firewall
+ * @package MediaMonks\FirewallFilterBundle\Security\Firewall
  * @author pawel@mediamonks.com
  */
 class GuardianListener implements ListenerInterface

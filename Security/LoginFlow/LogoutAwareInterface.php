@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\Security\LoginFlow;
+namespace MediaMonks\FirewallFilterBundle\Security\LoginFlow;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Interface LogoutAwareInterface
- * @package MediaMonks\SecurityBundle\Security\LoginFlow
+ * @package MediaMonks\FirewallFilterBundle\Security\LoginFlow
  * @author pawel@mediamonks.com
  */
 interface LogoutAwareInterface

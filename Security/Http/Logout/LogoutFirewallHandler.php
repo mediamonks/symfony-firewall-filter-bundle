@@ -1,8 +1,8 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\Security\Http\Logout;
+namespace MediaMonks\FirewallFilterBundle\Security\Http\Logout;
 
-use MediaMonks\SecurityBundle\Security\LoginFlow\LogoutAwareInterface;
+use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LogoutAwareInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 
 /**
  * Class LogoutEventDispatchHandler
- * @package MediaMonks\SecurityBundle\Security\Http\Logout
+ * @package MediaMonks\FirewallFilterBundle\Security\Http\Logout
  * @author pawel@mediamonks.com
  */
 class LogoutFirewallHandler implements LogoutHandlerInterface

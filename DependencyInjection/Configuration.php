@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\DependencyInjection;
+namespace MediaMonks\FirewallFilterBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

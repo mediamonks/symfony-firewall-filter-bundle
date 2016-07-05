@@ -1,13 +1,13 @@
 <?php
 
-namespace MediaMonks\SecurityBundle;
+namespace MediaMonks\FirewallFilterBundle;
 
-use MediaMonks\SecurityBundle\DependencyInjection\CompilerPass\LoginFlowCompiler;
-use MediaMonks\SecurityBundle\DependencyInjection\Security\GuardianFactory;
+use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\LoginFlowCompiler;
+use MediaMonks\FirewallFilterBundle\DependencyInjection\Security\GuardianFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class MediaMonksSecurityBundle extends Bundle
+class MediaMonksFirewallFilterBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

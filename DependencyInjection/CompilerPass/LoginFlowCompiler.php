@@ -1,18 +1,18 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\DependencyInjection\CompilerPass;
+namespace MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass;
 
-use MediaMonks\SecurityBundle\DependencyInjection\Security\GuardianFactory;
-use MediaMonks\SecurityBundle\Security\LoginFlow\CheckAwareInterface;
-use MediaMonks\SecurityBundle\Security\LoginFlow\LoginAwareInterface;
-use MediaMonks\SecurityBundle\Security\LoginFlow\LogoutAwareInterface;
+use MediaMonks\FirewallFilterBundle\DependencyInjection\Security\GuardianFactory;
+use MediaMonks\FirewallFilterBundle\Security\LoginFlow\CheckAwareInterface;
+use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LoginAwareInterface;
+use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LogoutAwareInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * Class LoginFlowCompiler
- * @package MediaMonks\SecurityBundle\DependencyInjection\CompilerPass
+ * @package MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass
  * @author pawel@mediamonks.com
  */
 class LoginFlowCompiler implements CompilerPassInterface
@@ -30,8 +30,11 @@ class LoginFlowCompiler implements CompilerPassInterface
 
     protected function processFirewall(ContainerBuilder $container, $firewall, $handlers)
     {
+        //Interactive login
         $login = $container->getDefinition(GuardianFactory::AUTH_CHECK_LISTENER);
+        //Firewall listener
         $check = $container->getDefinition(GuardianFactory::getFirewallListenerName($firewall));
+        //Logout listener
         $logout = $container->getDefinition(GuardianFactory::getLogoutHandlerName($firewall));
 
         $handlers = array_flip($handlers);

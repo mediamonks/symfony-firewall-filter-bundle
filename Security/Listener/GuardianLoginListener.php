@@ -1,14 +1,14 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\Security\Listener;
+namespace MediaMonks\FirewallFilterBundle\Security\Listener;
 
-use MediaMonks\SecurityBundle\Security\Http\Firewall;
-use MediaMonks\SecurityBundle\Security\LoginFlow\LoginAwareInterface;
+use MediaMonks\FirewallFilterBundle\Security\Http\Firewall;
+use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LoginAwareInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
  * Class GuardianListener
- * @package MediaMonks\SecurityBundle\Security\Listener
+ * @package MediaMonks\FirewallFilterBundle\Security\Listener
  * @author pawel@mediamonks.com
  */
 class GuardianLoginListener

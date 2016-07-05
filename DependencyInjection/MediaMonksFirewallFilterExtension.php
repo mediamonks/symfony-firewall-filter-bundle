@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\DependencyInjection;
+namespace MediaMonks\FirewallFilterBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class MediaMonksSecurityExtension extends Extension
+class MediaMonksFirewallFilterExtension extends Extension
 {
     /**
      * {@inheritdoc}

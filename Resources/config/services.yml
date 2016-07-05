@@ -1,21 +1,21 @@
 parameters:
-    security.firewall.class: MediaMonks\SecurityBundle\Security\Http\Firewall
-    security.firewall.map.class: MediaMonks\SecurityBundle\Security\FirewallMap
+    security.firewall.class: MediaMonks\FirewallFilterBundle\Security\Http\Firewall
+    security.firewall.map.class: MediaMonks\FirewallFilterBundle\Security\FirewallMap
 
 services:
     media_monks.guardian.authentication_provider:
         abstract: true
-        class: MediaMonks\SecurityBundle\Security\Authentication\Provider\GuardianProvider
+        class: MediaMonks\FirewallFilterBundle\Security\Authentication\Provider\GuardianProvider
 
     media_monks.guardian.listener:
-        class: MediaMonks\SecurityBundle\Security\Listener\GuardianLoginListener
+        class: MediaMonks\FirewallFilterBundle\Security\Listener\GuardianLoginListener
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }
 
     media_monks.guardian.firewall_listener:
         abstract: true
-        class: MediaMonks\SecurityBundle\Security\Firewall\GuardianListener
+        class: MediaMonks\FirewallFilterBundle\Security\Firewall\GuardianListener
 
     media_monks.guardian.logout_handler:
         abstract: true
-        class: MediaMonks\SecurityBundle\Security\Http\Logout\LogoutFirewallHandler
+        class: MediaMonks\FirewallFilterBundle\Security\Http\Logout\LogoutFirewallHandler

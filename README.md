@@ -1,4 +1,4 @@
-# MediaMonks security bundle
+# MediaMonks firewall filter bundle
 
 This bundle adds to *Request* object information about current firewall.
 
@@ -33,6 +33,6 @@ my_test_listener:
 ```
 
 Base on what interfaces the service implements, handlers are added to proper hook: 
- * **MediaMonks\SecurityBundle\Security\LoginFlow\LoginAwareInterface** - interactive login to via firewall
+ * **MediaMonks\SecurityBundle\Security\LoginFlow\LoginAwareInterface** - interactive login to firewall
  * **MediaMonks\SecurityBundle\Security\LoginFlow\CheckAwareInterface** - request via firewall
  * **MediaMonks\SecurityBundle\Security\LoginFlow\LogoutAwareInterface** - logout from firewall

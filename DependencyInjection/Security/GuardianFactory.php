@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaMonks\SecurityBundle\DependencyInjection\Security;
+namespace MediaMonks\FirewallFilterBundle\DependencyInjection\Security;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class GuardianFactory
- * @package MediaMonks\SecurityBundle\DependencyInjection\Security
+ * @package MediaMonks\FirewallFilterBundle\DependencyInjection\Security
  * @author pawel@mediamonks.com
  */
 class GuardianFactory implements SecurityFactoryInterface
