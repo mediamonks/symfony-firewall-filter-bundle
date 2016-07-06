@@ -2,33 +2,33 @@
 
 This bundle adds to *Request* object information about current firewall.
 
-Next to it **Guardian** listener was added, which provides some interesting functionality.
+Next to it **FirewallFilter** listener was added, which provides an interesting functionality.
 
-## Guardian
+## FirewallFilter
 
-Aim of **Guardian** is to add 3 "hooks" related to login flow.
+Aim of **FirewallFilter** is to add 3 "hooks" related to login flow.
 
-To enable Guardian for certain firewall:
+To enable FirewallFilter for certain firewall:
 
 ```
     security:
         firewall_foo:
-            guardian: ~
+            firewall_filter: ~
             
         firewall_bar:        
-            guardian:
+            firewall_filter:
                 handler:
                     - bar_listener
 ```
 
-Besides defining handlers in security configuration(**services ids**), developer can tag his services with *guardian.firewall_name*.
-They'll be processed and added to guardian flow via *CompilerPass* 
+Besides defining handlers in security configuration(**services ids**), developer can tag his services with *firewall_filter.firewall_name*.
+They'll be processed and added to FirewallFilter via *CompilerPass* 
 
 ```
 my_test_listener:
     class: Namespace\To\MyEventListener
     tags:
-        - { name: 'guardian.admin'}
+        - { name: 'firewall_filter.admin'}
 
 ```
 
