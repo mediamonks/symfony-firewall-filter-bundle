@@ -2,7 +2,7 @@
 
 namespace MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass;
 
-use MediaMonks\FirewallFilterBundle\DependencyInjection\Security\GuardianFactory;
+use MediaMonks\FirewallFilterBundle\DependencyInjection\Security\FirewallFilterFactory;
 use MediaMonks\FirewallFilterBundle\Security\LoginFlow\CheckAwareInterface;
 use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LoginAwareInterface;
 use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LogoutAwareInterface;
@@ -19,11 +19,11 @@ class LoginFlowCompiler implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if(!$container->hasParameter(GuardianFactory::GUARDIAN_PARAMETER)){
+        if(!$container->hasParameter(FirewallFilterFactory::DATA_PARAMETER)){
             return;
         }
 
-        foreach($container->getParameter(GuardianFactory::GUARDIAN_PARAMETER) as $firewall => $handlers){
+        foreach($container->getParameter(FirewallFilterFactory::DATA_PARAMETER) as $firewall => $handlers){
             $this->processFirewall($container, $firewall, $handlers);
         }
     }
@@ -31,11 +31,11 @@ class LoginFlowCompiler implements CompilerPassInterface
     protected function processFirewall(ContainerBuilder $container, $firewall, $handlers)
     {
         //Interactive login
-        $login = $container->getDefinition(GuardianFactory::AUTH_CHECK_LISTENER);
+        $login = $container->getDefinition(FirewallFilterFactory::AUTH_CHECK_LISTENER);
         //Firewall listener
-        $check = $container->getDefinition(GuardianFactory::getFirewallListenerName($firewall));
+        $check = $container->getDefinition(FirewallFilterFactory::getFirewallListenerName($firewall));
         //Logout listener
-        $logout = $container->getDefinition(GuardianFactory::getLogoutHandlerName($firewall));
+        $logout = $container->getDefinition(FirewallFilterFactory::getLogoutHandlerName($firewall));
 
         $handlers = array_flip($handlers);
         array_walk($handlers, function(&$item, $key){

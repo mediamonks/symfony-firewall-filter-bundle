@@ -10,18 +10,18 @@ use Symfony\Component\DependencyInjection\Reference;
 
 
 /**
- * Class GuardianFactory
+ * Class FirewallFilterFactory
  * @package MediaMonks\FirewallFilterBundle\DependencyInjection\Security
  * @author pawel@mediamonks.com
  */
-class GuardianFactory implements SecurityFactoryInterface
+class FirewallFilterFactory implements SecurityFactoryInterface
 {
-    const GUARDIAN_PARAMETER = 'guardian_params';
+    const DATA_PARAMETER = 'firewall_filter_params';
 
-    const AUTH_CHECK_LISTENER = 'media_monks.guardian.listener';
-    const AUTH_FIREWALL_LISTENER = 'media_monks.guardian.firewall_listener';
-    const AUTH_LOGOUT_HANDLER = 'media_monks.guardian.logout_handler';
-    const AUTH_PROVIDER = 'media_monks.guardian.authentication_provider';
+    const AUTH_CHECK_LISTENER = 'media_monks.firewall_filter.listener';
+    const AUTH_FIREWALL_LISTENER = 'media_monks.firewall_filter.firewall_listener';
+    const AUTH_LOGOUT_HANDLER = 'media_monks.firewall_filter.logout_handler';
+    const AUTH_PROVIDER = 'media_monks.firewall_filter.authentication_provider';
     const SYMFONY_LOGOUT_LISTENER = 'security.logout_listener';
 
     public function getPosition()
@@ -31,7 +31,7 @@ class GuardianFactory implements SecurityFactoryInterface
 
     public function getKey()
     {
-        return 'guardian';
+        return 'firewall_filter';
     }
 
     public function addConfiguration(NodeDefinition $builder)
@@ -76,13 +76,13 @@ class GuardianFactory implements SecurityFactoryInterface
     protected function addForCompiler(ContainerBuilder $builder, $id, $handlers)
     {
         $toMerge = [];
-        if($builder->hasParameter(self::GUARDIAN_PARAMETER)){
-            $toMerge = $builder->getParameter(self::GUARDIAN_PARAMETER);
+        if($builder->hasParameter(self::DATA_PARAMETER)){
+            $toMerge = $builder->getParameter(self::DATA_PARAMETER);
         }
 
         $toMerge[$id] = $handlers;
 
-        $builder->setParameter(self::GUARDIAN_PARAMETER, $toMerge);
+        $builder->setParameter(self::DATA_PARAMETER, $toMerge);
     }
 
     public static function getFirewallListenerName($id)

@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
  * @package MediaMonks\FirewallFilterBundle\Security\Listener
  * @author pawel@mediamonks.com
  */
-class GuardianLoginListener
+class FirewallFilterLoginListener
 {
     /**
      * @var LoginAwareInterface[]

@@ -7,11 +7,11 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 
 /**
- * Class GuardianListener
+ * Class FirewallFilterListener
  * @package MediaMonks\FirewallFilterBundle\Security\Firewall
  * @author pawel@mediamonks.com
  */
-class GuardianListener implements ListenerInterface
+class FirewallFilterListener implements ListenerInterface
 {
     /**
      * @var CheckAwareInterface[]
