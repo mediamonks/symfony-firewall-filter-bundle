@@ -2,6 +2,8 @@
 
 namespace MediaMonks\FirewallFilterBundle\Security\LoginFlow;
 
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+
 /**
  * Interface CheckAwareInterface
  * @package MediaMonks\FirewallFilterBundle\Security\LoginFlow
@@ -9,5 +11,5 @@ namespace MediaMonks\FirewallFilterBundle\Security\LoginFlow;
  */
 interface CheckAwareInterface
 {
-    public function onCheck($event);
+    public function onCheck(GetResponseEvent $event);
 }
