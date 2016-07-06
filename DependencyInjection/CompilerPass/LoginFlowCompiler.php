@@ -42,7 +42,7 @@ class LoginFlowCompiler implements CompilerPassInterface
             $item = [];
         });
 
-        $handlers = array_merge($handlers, $container->findTaggedServiceIds('guardian.' . $firewall));
+        $handlers = array_merge($handlers, $container->findTaggedServiceIds('firewall_filter.' . $firewall));
 
         foreach($handlers as $handler => $params){
             $this->processHandler(
