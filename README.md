@@ -1,4 +1,4 @@
-# MediaMonks firewall filter bundle
+# MediaMonks Firewall Filter bundle
 
 This bundle adds to *Request* object information about current firewall.
 
