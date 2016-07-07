@@ -7,7 +7,7 @@ services:
         abstract: true
         class: MediaMonks\FirewallFilterBundle\Security\Authentication\Provider\FirewallFilterProvider
 
-    media_monks.firewall_filter.listener:
+    media_monks.firewall_filter.auth_listener:
         class: MediaMonks\FirewallFilterBundle\Security\Listener\FirewallFilterLoginListener
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }

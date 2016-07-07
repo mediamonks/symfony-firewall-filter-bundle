@@ -22,7 +22,7 @@ class FirewallFilterFactoryTest extends AbstractFirewallFilterTestCase
         $expectedParam = [];
         foreach($data as $row){
             list($id, $config, $userProviderId, $entryPoint) = array_values($row);
-            $expectedParam[$id] = $config['handler'];
+            $expectedParam[$id] = $config['handlers'];
 
             $logoutService = FirewallFilterFactory::SYMFONY_LOGOUT_LISTENER . '.' . $id;
 
@@ -53,7 +53,7 @@ class FirewallFilterFactoryTest extends AbstractFirewallFilterTestCase
             [
                 [
                     'id' => 'test',
-                    'config' => [ 'handler' => [] ],
+                    'config' => [ 'handlers' => [] ],
                     'userProviderId' => 'test',
                     'entryPoint' => 'entrypoint',
                 ]
@@ -62,13 +62,13 @@ class FirewallFilterFactoryTest extends AbstractFirewallFilterTestCase
             [
                 [
                     'id' => 'test',
-                    'config' => [ 'handler' => [] ],
+                    'config' => [ 'handlers' => [] ],
                     'userProviderId' => 'test',
                     'entryPoint' => 'entrypoint',
                 ],
                 [
                     'id' => 'test2',
-                    'config' => [ 'handler' => [] ],
+                    'config' => [ 'handlers' => [] ],
                     'userProviderId' => 'test2',
                     'entryPoint' => 'entrypoint2',
                 ]

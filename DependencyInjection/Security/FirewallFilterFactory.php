@@ -18,7 +18,7 @@ class FirewallFilterFactory implements SecurityFactoryInterface
 {
     const DATA_PARAMETER = 'firewall_filter_params';
 
-    const AUTH_CHECK_LISTENER = 'media_monks.firewall_filter.listener';
+    const AUTH_CHECK_LISTENER = 'media_monks.firewall_filter.auth_listener';
     const AUTH_FIREWALL_LISTENER = 'media_monks.firewall_filter.firewall_listener';
     const AUTH_LOGOUT_HANDLER = 'media_monks.firewall_filter.logout_handler';
     const AUTH_PROVIDER = 'media_monks.firewall_filter.authentication_provider';
@@ -64,7 +64,7 @@ class FirewallFilterFactory implements SecurityFactoryInterface
         $container->getDefinition(self::SYMFONY_LOGOUT_LISTENER . '.' . $id)
             ->addMethodCall('addHandler', [ new Reference($authLogoutId) ]);
 
-        $this->addForCompiler($container, $id, $config['handler']);
+        $this->addForCompiler($container, $id, $config['handlers']);
 
         return [
             $authProviderId,
