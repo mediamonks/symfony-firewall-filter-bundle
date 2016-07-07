@@ -4,7 +4,7 @@ STILL IN DEVELOPMENT
 
 This bundle adds to *Request* object information about current firewall.
 
-Next to it **FirewallFilter** listener was added, which provides an interesting functionality.
+Next to it **FirewallFilter** listener is added.
 
 ## FirewallFilter
 
