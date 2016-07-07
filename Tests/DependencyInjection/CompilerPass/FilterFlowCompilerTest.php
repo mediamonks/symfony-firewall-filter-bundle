@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaMonks\FirewallFilterBundle\Tests\CompilerPass;
+namespace MediaMonks\FirewallFilterBundle\Tests\DependencyInjection\CompilerPass;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\FilterFlowCompiler;
