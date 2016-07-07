@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class FirewallFilterFactoryTest extends AbstractFirewallFilterTestCase
 {
     /**
-     * @dataProvider testCreateDataProvider
+     * @dataProvider createDataProvider
      */
     public function testCreate()
     {
@@ -45,7 +45,7 @@ class FirewallFilterFactoryTest extends AbstractFirewallFilterTestCase
     }
 
 
-    public function testCreateDataProvider()
+    public function createDataProvider()
     {
         return
         [

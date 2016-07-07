@@ -6,12 +6,12 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\FilterFlowCompiler;
 use MediaMonks\FirewallFilterBundle\DependencyInjection\Security\FirewallFilterFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use \Mockery as m;
 use Symfony\Component\DependencyInjection\Definition;
+use \Mockery as m;
 
 /**
  * Class FilterFlowCompilerTest
- * @package MediaMonks\FirewallFilterBundle\Tests\CompilerPass
+ * @package MediaMonks\FirewallFilterBundle\Tests\DependencyInjection\CompilerPass
  * @author pawel@mediamonks.com
  */
 class FilterFlowCompilerTest extends AbstractCompilerPassTestCase
