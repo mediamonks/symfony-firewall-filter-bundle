@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class FirewallFilterLoginListener
 {
     /**
-     * @var LoginAwareInterface[]
+     * @var LoginAwareInterface[][]
      */
     protected $handlers = [];
 

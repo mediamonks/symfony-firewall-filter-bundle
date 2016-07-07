@@ -38,7 +38,7 @@ class FilterFlowCompiler implements CompilerPassInterface
         $logout = $container->getDefinition(FirewallFilterFactory::getLogoutHandlerName($firewall));
 
         $handlers = array_flip($handlers);
-        array_walk($handlers, function(&$item, $key){
+        array_walk($handlers, function(&$item){
             $item = [];
         });
 
