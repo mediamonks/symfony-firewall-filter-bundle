@@ -6,11 +6,11 @@ use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProvid
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
- * Class GuardianProvider
+ * Class FirewallFilterProvider
  * @package MediaMonks\FirewallFilterBundle\Security\Authentication\Provider
  * @author pawel@mediamonks.com
  */
-class GuardianProvider implements AuthenticationProviderInterface
+class FirewallFilterProvider implements AuthenticationProviderInterface
 {
     public function supports(TokenInterface $token)
     {

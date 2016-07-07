@@ -5,7 +5,7 @@ parameters:
 services:
     media_monks.firewall_filter.authentication_provider:
         abstract: true
-        class: MediaMonks\FirewallFilterBundle\Security\Authentication\Provider\GuardianProvider
+        class: MediaMonks\FirewallFilterBundle\Security\Authentication\Provider\FirewallFilterProvider
 
     media_monks.firewall_filter.listener:
         class: MediaMonks\FirewallFilterBundle\Security\Listener\FirewallFilterLoginListener
