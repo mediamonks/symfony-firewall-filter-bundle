@@ -11,11 +11,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * Class LoginFlowCompiler
+ * Class FilterFlowCompiler
  * @package MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass
  * @author pawel@mediamonks.com
  */
-class LoginFlowCompiler implements CompilerPassInterface
+class FilterFlowCompiler implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
