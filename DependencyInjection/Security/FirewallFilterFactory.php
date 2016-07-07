@@ -38,7 +38,7 @@ class FirewallFilterFactory implements SecurityFactoryInterface
     {
         $builder
             ->children()
-            ->arrayNode('handler')
+            ->arrayNode('handlers')
             ->info('An array of service ids for all of your "handlers"')
             ->prototype('scalar')->end()
             ->end()
