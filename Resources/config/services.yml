@@ -1,7 +1,3 @@
-parameters:
-    security.firewall.class: MediaMonks\FirewallFilterBundle\Security\Http\Firewall
-    security.firewall.map.class: MediaMonks\FirewallFilterBundle\Security\FirewallMap
-
 services:
     media_monks.firewall_filter.authentication_provider:
         abstract: true

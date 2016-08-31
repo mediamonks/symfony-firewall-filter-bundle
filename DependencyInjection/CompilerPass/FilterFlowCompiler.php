@@ -32,10 +32,15 @@ class FilterFlowCompiler implements CompilerPassInterface
     {
         //Interactive login
         $login = $container->getDefinition(FirewallFilterFactory::AUTH_CHECK_LISTENER);
+
         //Firewall listener
         $check = $container->getDefinition(FirewallFilterFactory::getFirewallListenerName($firewall));
+
         //Logout listener
-        $logout = $container->getDefinition(FirewallFilterFactory::getLogoutHandlerName($firewall));
+        $logout =
+            $container->hasDefinition(FirewallFilterFactory::getLogoutHandlerName($firewall))
+            ? $container->getDefinition(FirewallFilterFactory::getLogoutHandlerName($firewall))
+            : null;
 
         $handlers = array_flip($handlers);
         array_walk($handlers, function(&$item){
@@ -51,7 +56,14 @@ class FilterFlowCompiler implements CompilerPassInterface
         }
     }
 
-    public function processHandler(Definition $handler, Definition $login, Definition $check, Definition $logout, $firewall)
+    /**
+     * @param Definition $handler
+     * @param Definition $login
+     * @param Definition $check
+     * @param Definition|null $logout
+     * @param $firewall
+     */
+    public function processHandler(Definition $handler, Definition $login, Definition $check, $logout, $firewall)
     {
         $interfaces = class_implements($handler->getClass());
 
@@ -67,7 +79,7 @@ class FilterFlowCompiler implements CompilerPassInterface
             );
         }
 
-        if(isset($interfaces[LogoutAwareInterface::class])){
+        if($logout && isset($interfaces[LogoutAwareInterface::class])){
             $logout->addMethodCall(
                 'addHandler', [$handler]
             );

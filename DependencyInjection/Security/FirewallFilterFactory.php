@@ -58,11 +58,13 @@ class FirewallFilterFactory implements SecurityFactoryInterface
             ->setDefinition($authListenerId, new DefinitionDecorator(static::AUTH_FIREWALL_LISTENER));
 
         //Logout handler
-        $authLogoutId = static::getLogoutHandlerName($id);
-        $container
-            ->setDefinition($authLogoutId, new DefinitionDecorator(static::AUTH_LOGOUT_HANDLER));
-        $container->getDefinition(self::SYMFONY_LOGOUT_LISTENER . '.' . $id)
-            ->addMethodCall('addHandler', [ new Reference($authLogoutId) ]);
+        if($container->hasDefinition(self::SYMFONY_LOGOUT_LISTENER . '.' . $id)){
+            $authLogoutId = static::getLogoutHandlerName($id);
+            $container
+                ->setDefinition($authLogoutId, new DefinitionDecorator(static::AUTH_LOGOUT_HANDLER));
+            $container->getDefinition(self::SYMFONY_LOGOUT_LISTENER . '.' . $id)
+                ->addMethodCall('addHandler', [ new Reference($authLogoutId) ]);
+        }
 
         $this->addForCompiler($container, $id, $config['handlers']);
 
