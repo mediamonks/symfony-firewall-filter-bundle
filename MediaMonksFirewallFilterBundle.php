@@ -2,8 +2,8 @@
 
 namespace MediaMonks\FirewallFilterBundle;
 
-use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\FilterFlowCompiler;
-use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\OverrideCompiler;
+use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\FilterFlowPass;
+use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\OverridePass;
 use MediaMonks\FirewallFilterBundle\DependencyInjection\MediaMonksFirewallFilterExtension;
 use MediaMonks\FirewallFilterBundle\DependencyInjection\Security\FirewallFilterFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,7 +16,8 @@ class MediaMonksFirewallFilterBundle extends Bundle
         $extension = $container->getExtension('security');
         $extension->addSecurityListenerFactory(new FirewallFilterFactory());
 
-        $container->addCompilerPass(new FilterFlowCompiler());
+        $container->addCompilerPass(new OverridePass());
+        $container->addCompilerPass(new FilterFlowPass());
     }
 
     public function getContainerExtension()

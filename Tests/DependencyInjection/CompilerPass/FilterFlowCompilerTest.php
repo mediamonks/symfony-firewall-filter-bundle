@@ -3,7 +3,7 @@
 namespace MediaMonks\FirewallFilterBundle\Tests\DependencyInjection\CompilerPass;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
-use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\FilterFlowCompiler;
+use MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass\FilterFlowPass;
 use MediaMonks\FirewallFilterBundle\DependencyInjection\Security\FirewallFilterFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -18,7 +18,7 @@ class FilterFlowCompilerTest extends AbstractCompilerPassTestCase
 {
 	protected function registerCompilerPass(ContainerBuilder $container)
 	{
-		$container->addCompilerPass(new FilterFlowCompiler());
+		$container->addCompilerPass(new FilterFlowPass());
 	}
 
 	public function testLoginHandlerAdded()

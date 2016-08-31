@@ -21,16 +21,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('mediamonks_security');
 
-        $this->addOverrideNode($rootNode);
-
         return $treeBuilder;
-    }
-
-    public function addOverrideNode(ArrayNodeDefinition $node)
-    {
-        $node->children()
-            ->scalarNode('add_firewall')
-            ->defaultFalse()
-            ->end();
     }
 }

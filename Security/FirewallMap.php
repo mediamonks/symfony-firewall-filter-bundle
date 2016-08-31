@@ -26,7 +26,6 @@ class FirewallMap extends FirewallMapBase
     {
         foreach ($this->map as $contextId => $requestMatcher) {
             if (null === $requestMatcher || $requestMatcher->matches($request)) {
-
                 $parts = explode('.', $contextId);
                 $this->lastPickedFirewall = end($parts);
 
