@@ -1,0 +1,41 @@
+imports:
+    - { resource: ./../config/config.yml }
+
+services:
+    handler.factory:
+        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\HandlerFactory
+
+    test.loginaware:
+        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\AbstractAware\AbstractLoginAware
+        factory: [ '@handler.factory', 'createLoginAware' ]
+        tags:
+            - { name: 'firewall_filter.functional_test' }
+
+    test.checkaware:
+        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\AbstractAware\AbstractCheckAware
+        factory: [ '@handler.factory', 'createCheckAware' ]
+        tags:
+            - { name: 'firewall_filter.functional_test' }
+
+    test.logoutaware:
+        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\AbstractAware\AbstractLogoutAware
+        factory: [ '@handler.factory', 'createLogoutAware' ]
+        tags:
+            - { name: 'firewall_filter.functional_test' }
+
+security:
+    firewalls:
+        functional_test:
+            pattern:  ^/test(.*)
+            firewall_filter: ~
+            anonymous: true
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user1: { password: test, roles: [ROLE_USER] }
+                    user2:  { password: test, roles: [ROLE_ADMIN] }

@@ -1,0 +1,11 @@
+test_route:
+    path: /test
+    defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::testAction }
+
+another_test:
+    path: /test/test
+    defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::anotherTestAction }
+
+not_relevant:
+    path: /not/relevant
+    defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::notRelevantAction }
