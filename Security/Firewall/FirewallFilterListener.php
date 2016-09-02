@@ -8,6 +8,8 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 
 /**
  * Class FirewallFilterListener
+ * Listens to every request made against certain firewall.
+ *
  * @package MediaMonks\FirewallFilterBundle\Security\Firewall
  * @author pawel@mediamonks.com
  */

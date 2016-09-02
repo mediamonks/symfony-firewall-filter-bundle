@@ -11,6 +11,8 @@ use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 
 /**
  * Class LogoutEventDispatchHandler
+ * Listens to logout event for certain firewall.
+ *
  * @package MediaMonks\FirewallFilterBundle\Security\Http\Logout
  * @author pawel@mediamonks.com
  */

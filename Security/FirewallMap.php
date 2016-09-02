@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class FirewallMap
+ * Small customization of Symfony FirewallMap. Contains lastPickedFirewall. I didn't want to mess with returned value
+ * of method getListeners. It looks like it's not used anywhere else, but I'm not sure :)
+ *
  * @package MediaMonks\FirewallFilterBundle\Security
  * @author pawel@mediamonks.com
  */

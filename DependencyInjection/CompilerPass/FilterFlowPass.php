@@ -12,6 +12,8 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * Class FilterFlowPass
+ * Pass will fill login, firewall and logout handlers
+ *
  * @package MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass
  * @author pawel@mediamonks.com
  */
@@ -28,6 +30,12 @@ class FilterFlowPass implements CompilerPassInterface
         }
     }
 
+    /**
+     * Process certain firewall
+     * @param ContainerBuilder $container
+     * @param $firewall
+     * @param $handlers
+     */
     protected function processFirewall(ContainerBuilder $container, $firewall, $handlers)
     {
         //Interactive login
@@ -57,6 +65,7 @@ class FilterFlowPass implements CompilerPassInterface
     }
 
     /**
+     * Add handler to listeners
      * @param Definition $handler
      * @param Definition $login
      * @param Definition $check

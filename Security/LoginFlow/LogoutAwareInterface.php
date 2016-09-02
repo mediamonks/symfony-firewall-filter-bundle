@@ -8,6 +8,8 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Interface LogoutAwareInterface
+ * Implement this interface if you want your handler to be notified about logout to firewall.
+ *
  * @package MediaMonks\FirewallFilterBundle\Security\LoginFlow
  * @author pawel@mediamonks.com
  */

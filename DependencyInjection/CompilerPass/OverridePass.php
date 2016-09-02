@@ -6,6 +6,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class OverridePass in package MediaMonks\FirewallFilterBundle\DependencyInjection\CompilerPass
+ * Overrides Firewall and FirewallMap. Thanks to new implementation request attribute "_current_firewall"
+ * is available. It provides current firewall name.
  *
  * @author pawel@mediamonks.com
  */

@@ -11,6 +11,9 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class FirewallFilterFactory
+ * Security extension. Defines "event" handlers for each firewall with "firewall_filter" attribute.
+ * Besides it gathers parameters that are later used byt FilterFlowPass.
+ *
  * @package MediaMonks\FirewallFilterBundle\DependencyInjection\Security
  * @author pawel@mediamonks.com
  */
@@ -75,6 +78,12 @@ class FirewallFilterFactory implements SecurityFactoryInterface
         ];
     }
 
+    /**
+     * Add handlers to list that will be processed in compiler
+     * @param ContainerBuilder $builder
+     * @param $id
+     * @param $handlers
+     */
     protected function addForCompiler(ContainerBuilder $builder, $id, $handlers)
     {
         $toMerge = [];
@@ -87,11 +96,21 @@ class FirewallFilterFactory implements SecurityFactoryInterface
         $builder->setParameter(self::DATA_PARAMETER, $toMerge);
     }
 
+    /**
+     * Return name of certain firewall listener
+     * @param $id
+     * @return string
+     */
     public static function getFirewallListenerName($id)
     {
         return static::AUTH_FIREWALL_LISTENER . '.' . $id;
     }
 
+    /**
+     * Return name of certain firewall logout listener
+     * @param $id
+     * @return string
+     */
     public static function getLogoutHandlerName($id)
     {
         return static::AUTH_LOGOUT_HANDLER . '.' . $id;

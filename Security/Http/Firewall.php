@@ -12,6 +12,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class Firewall
+ * Small customization of Symfony Firewall. Adds _current_firewall attribute to request.
+ *
  * @package MediaMonks\FirewallFilterBundle\Security\Http
  * @author pawel@mediamonks.com
  */

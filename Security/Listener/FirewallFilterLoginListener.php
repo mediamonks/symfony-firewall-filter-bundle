@@ -8,6 +8,8 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
  * Class GuardianListener
+ * Listens to login event for certain firewall.
+ *
  * @package MediaMonks\FirewallFilterBundle\Security\Listener
  * @author pawel@mediamonks.com
  */
