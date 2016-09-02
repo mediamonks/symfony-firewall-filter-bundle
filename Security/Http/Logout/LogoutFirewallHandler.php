@@ -38,7 +38,7 @@ class LogoutFirewallHandler implements LogoutHandlerInterface
      */
     public function logout(Request $request, Response $response, TokenInterface $token)
     {
-        foreach ($this->handlers as $handler){
+        foreach ($this->handlers as $handler) {
             $handler->onLogout($request, $response, $token);
         }
     }

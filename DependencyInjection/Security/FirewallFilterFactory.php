@@ -81,7 +81,7 @@ class FirewallFilterFactory implements SecurityFactoryInterface
     /**
      * Add handlers to list that will be processed in compiler
      * @param ContainerBuilder $builder
-     * @param $id
+     * @param string $id
      * @param $handlers
      */
     protected function addForCompiler(ContainerBuilder $builder, $id, $handlers)
