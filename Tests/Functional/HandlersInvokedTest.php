@@ -9,10 +9,12 @@ use MediaMonks\FirewallFilterBundle\Security\LoginFlow\CheckAwareInterface;
 use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LoginAwareInterface;
 use MediaMonks\FirewallFilterBundle\Security\LoginFlow\LogoutAwareInterface;
 use Mockery as m;
+use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
@@ -24,6 +26,11 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
 {
     protected $testCase = 'Handlers';
 
+    protected $firewall = 'functional_test';
+
+    /**
+     * @var \Symfony\Bundle\FrameworkBundle\Client
+     */
     protected $client;
 
     public function setUp()
@@ -43,8 +50,8 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
             ->getMock();
 
         /** @var FirewallFilterLoginListener $testService */
-        $testService = static::$kernel->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
-        $testService->addHandler('functional_test', $loginAware);
+        $testService = $this->client->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
+        $testService->addHandler($this->firewall, $loginAware);
 
         $this->client->request('POST', '/test/login', [
             '_username' => 'user1',
@@ -61,8 +68,8 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
             ->getMock();
 
         /** @var FirewallFilterLoginListener $testService */
-        $testService = static::$kernel->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
-        $testService->addHandler('functional_test', $loginAware);
+        $testService = $this->client->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
+        $testService->addHandler($this->firewall, $loginAware);
 
         $this->client->request('POST', '/test/login', [
             '_username' => 'user',
@@ -79,23 +86,31 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
             ->getMock();
 
         /** @var FirewallFilterListener $testService */
-        $testService = static::$kernel->getContainer()->get(FirewallFilterFactory::getFirewallListenerName('functional_test'));
+        $testService = $this->client->getContainer()->get(FirewallFilterFactory::getFirewallListenerName($this->firewall));
         $testService->addHandler($checkAware);
 
         $this->client->request('GET', '/test');
     }
 
-    public function atestOnLogout()
+    public function testOnLogoutNoUser()
     {
-        $kernel = static::createKernel([
-            'test_case' => $this->testCase,
-            'root_config' => __DIR__ . '/app/Handlers/config.yml'
-        ]);
-
-        $kernel->boot();
-
         /** @var FirewallFilterListener $testService */
-        $testService = $kernel->getContainer()->get(FirewallFilterFactory::getLogoutHandlerName('functional_test'));
+        $testService = $this->client->getContainer()->get(FirewallFilterFactory::getLogoutHandlerName($this->firewall));
+        $testService->addHandler(
+            m::mock(LogoutAwareInterface::class)
+                ->shouldReceive('onLogout')
+                ->with(m::type(Request::class), m::type(Response::class), m::type(TokenInterface::class))
+                ->never()
+                ->getMock()
+        );
+
+        $this->client->request('GET', '/test/logout');
+    }
+
+    public function testOnLogoutUser()
+    {
+        /** @var FirewallFilterListener $testService */
+        $testService = $this->client->getContainer()->get(FirewallFilterFactory::getLogoutHandlerName('functional_test'));
         $testService->addHandler(
             m::mock(LogoutAwareInterface::class)
                 ->shouldReceive('onLogout')
@@ -104,8 +119,14 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
                 ->getMock()
         );
 
-        $client = $kernel->getContainer()->get('test.client');
+        $token = new UsernamePasswordToken('user1', null, $this->firewall, array('ROLE_ADMIN'));
+        $session = $this->client->getContainer()->get('session');
+        $session->set('_security_' . $this->firewall, serialize($token));
+        $session->save();
 
-        $response = $client->request('GET', '/test');
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
+
+        $this->client->request('GET', '/test/logout');
     }
 }
