@@ -21,11 +21,11 @@ class FilterFlowPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if(!$container->hasParameter(FirewallFilterFactory::DATA_PARAMETER)){
+        if (!$container->hasParameter(FirewallFilterFactory::DATA_PARAMETER)) {
             return;
         }
 
-        foreach($container->getParameter(FirewallFilterFactory::DATA_PARAMETER) as $firewall => $handlers){
+        foreach ($container->getParameter(FirewallFilterFactory::DATA_PARAMETER) as $firewall => $handlers) {
             $this->processFirewall($container, $firewall, $handlers);
         }
     }
@@ -51,13 +51,13 @@ class FilterFlowPass implements CompilerPassInterface
             : null;
 
         $handlers = array_flip($handlers);
-        array_walk($handlers, function(&$item){
+        array_walk($handlers, function(&$item) {
             $item = [];
         });
 
         $handlers = array_merge($handlers, $container->findTaggedServiceIds('firewall_filter.' . $firewall));
 
-        foreach($handlers as $handler => $params){
+        foreach ($handlers as $handler => $params) {
             $this->processHandler(
                 $container->getDefinition($handler), $login, $check, $logout, $firewall
             );
@@ -76,19 +76,19 @@ class FilterFlowPass implements CompilerPassInterface
     {
         $interfaces = class_implements($handler->getClass());
 
-        if(isset($interfaces[LoginAwareInterface::class])){
+        if (isset($interfaces[LoginAwareInterface::class])) {
             $login->addMethodCall(
                 'addHandler', [$firewall, $handler]
             );
         }
 
-        if(isset($interfaces[CheckAwareInterface::class])){
+        if (isset($interfaces[CheckAwareInterface::class])) {
             $check->addMethodCall(
                 'addHandler', [$handler]
             );
         }
 
-        if($logout && isset($interfaces[LogoutAwareInterface::class])){
+        if ($logout && isset($interfaces[LogoutAwareInterface::class])) {
             $logout->addMethodCall(
                 'addHandler', [$handler]
             );

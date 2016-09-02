@@ -33,7 +33,7 @@ class FirewallFilterListener implements ListenerInterface
      */
     public function handle(GetResponseEvent $event)
     {
-        foreach($this->handlers as $handler){
+        foreach ($this->handlers as $handler) {
             $handler->onCheck($event);
         }
     }

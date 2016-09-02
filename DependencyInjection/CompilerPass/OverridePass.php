@@ -20,7 +20,7 @@ class OverridePass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if(
+        if (
             !$container->hasDefinition(self::SECURITY_FIREWALL_DEFINITION)
             || !$container->has(self::SECURITY_FIREWALL_MAP_DEFINITION)
         ) {

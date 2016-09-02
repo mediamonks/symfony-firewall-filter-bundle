@@ -26,7 +26,7 @@ class FirewallFilterLoginListener
      */
     public function addHandler($firewall, LoginAwareInterface $handler)
     {
-        if(!isset($this->handlers[$firewall])){
+        if (!isset($this->handlers[$firewall])) {
             $this->handlers[$firewall] = [];
         }
 
@@ -40,11 +40,11 @@ class FirewallFilterLoginListener
     {
         $currentFirewall = $event->getRequest()->attributes->get(Firewall::CURRENT_FIREWALL_KEY);
 
-        if(!$currentFirewall || !isset($this->handlers[$currentFirewall])){
+        if (!$currentFirewall || !isset($this->handlers[$currentFirewall])) {
             return;
         }
 
-        foreach($this->handlers[$currentFirewall] as $handler){
+        foreach ($this->handlers[$currentFirewall] as $handler) {
             $handler->onLogin($event);
         }
     }
