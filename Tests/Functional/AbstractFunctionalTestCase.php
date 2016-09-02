@@ -5,13 +5,14 @@ namespace MediaMonks\FirewallFilterBundle\Tests\Functional;
 use MediaMonks\FirewallFilterBundle\Tests\Functional\app\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Mockery as m;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Class AbstractFunctionalTestCase in package MediaMonks\FirewallFilterBundle\Tests\DependencyInjection\Functional
  *
  * @author pawel@mediamonks.com
  */
-abstract class AbstractFunctionalTestCase extends KernelTestCase
+abstract class AbstractFunctionalTestCase extends WebTestCase
 {
     use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
 

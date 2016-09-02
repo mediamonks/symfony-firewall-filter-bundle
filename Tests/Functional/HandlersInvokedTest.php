@@ -24,14 +24,18 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
 {
     protected $testCase = 'Handlers';
 
-    public function testOnLogin()
+    protected $client;
+
+    public function setUp()
     {
-        $kernel = static::createKernel([
+        $this->client = static::createClient([
             'test_case' => $this->testCase,
             'root_config' => __DIR__ . '/app/Handlers/config.yml'
         ]);
-        $kernel->boot();
+    }
 
+    public function testOnLogin()
+    {
         $loginAware = m::mock(LoginAwareInterface::class)
             ->shouldReceive('onLogin')
             ->with(m::type(InteractiveLoginEvent::class))
@@ -39,12 +43,10 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
             ->getMock();
 
         /** @var FirewallFilterLoginListener $testService */
-        $testService = $kernel->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
+        $testService = static::$kernel->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
         $testService->addHandler('functional_test', $loginAware);
 
-        $client = $kernel->getContainer()->get('test.client');
-
-        $response = $client->request('POST', '/test/login', [
+        $this->client->request('POST', '/test/login', [
             '_username' => 'user1',
             '_password' => 'user1'
         ]);
@@ -52,12 +54,6 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
 
     public function testOnLoginFail()
     {
-        $kernel = static::createKernel([
-            'test_case' => $this->testCase,
-            'root_config' => __DIR__ . '/app/Handlers/config.yml'
-        ]);
-        $kernel->boot();
-
         $loginAware = m::mock(LoginAwareInterface::class)
             ->shouldReceive('onLogin')
             ->with(m::type(InteractiveLoginEvent::class))
@@ -65,12 +61,10 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
             ->getMock();
 
         /** @var FirewallFilterLoginListener $testService */
-        $testService = $kernel->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
+        $testService = static::$kernel->getContainer()->get(FirewallFilterFactory::AUTH_CHECK_LISTENER);
         $testService->addHandler('functional_test', $loginAware);
 
-        $client = $kernel->getContainer()->get('test.client');
-
-        $response = $client->request('POST', '/test/login', [
+        $this->client->request('POST', '/test/login', [
             '_username' => 'user',
             '_password' => 'not_exist'
         ]);
@@ -78,12 +72,6 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
 
     public function testOnCheck()
     {
-        $kernel = static::createKernel([
-            'test_case' => $this->testCase,
-            'root_config' => __DIR__ . '/app/Handlers/config.yml'
-        ]);
-        $kernel->boot();
-
         $checkAware = m::mock(CheckAwareInterface::class)
             ->shouldReceive('onCheck')
             ->with(m::type(GetResponseEvent::class))
@@ -91,12 +79,10 @@ class HandlersInvokedTest extends AbstractFunctionalTestCase
             ->getMock();
 
         /** @var FirewallFilterListener $testService */
-        $testService = $kernel->getContainer()->get(FirewallFilterFactory::getFirewallListenerName('functional_test'));
+        $testService = static::$kernel->getContainer()->get(FirewallFilterFactory::getFirewallListenerName('functional_test'));
         $testService->addHandler($checkAware);
 
-        $client = $kernel->getContainer()->get('test.client');
-
-        $response = $client->request('GET', '/test');
+        $this->client->request('GET', '/test');
     }
 
     public function atestOnLogout()
