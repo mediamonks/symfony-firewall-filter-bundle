@@ -2,10 +2,18 @@ test_route:
     path: /test
     defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::testAction }
 
-another_test:
+test_deeper:
     path: /test/test
     defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::anotherTestAction }
 
-not_relevant:
+non_test:
     path: /not/relevant
     defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::notRelevantAction }
+
+test_login:
+    path: /test/login
+    defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::login }
+
+test_logout:
+    path: /test/logout
+    defaults: { _controller: MediaMonks\FirewallFilterBundle\Tests\Functional\app\Handlers\TestController::logout }

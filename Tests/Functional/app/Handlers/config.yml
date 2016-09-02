@@ -1,34 +1,19 @@
 imports:
     - { resource: ./../config/config.yml }
 
-services:
-    handler.factory:
-        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\HandlerFactory
-
-    test.loginaware:
-        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\AbstractAware\AbstractLoginAware
-        factory: [ '@handler.factory', 'createLoginAware' ]
-        tags:
-            - { name: 'firewall_filter.functional_test' }
-
-    test.checkaware:
-        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\AbstractAware\AbstractCheckAware
-        factory: [ '@handler.factory', 'createCheckAware' ]
-        tags:
-            - { name: 'firewall_filter.functional_test' }
-
-    test.logoutaware:
-        class: MediaMonks\FirewallFilterBundle\Tests\Functional\app\AbstractAware\AbstractLogoutAware
-        factory: [ '@handler.factory', 'createLogoutAware' ]
-        tags:
-            - { name: 'firewall_filter.functional_test' }
-
 security:
     firewalls:
         functional_test:
             pattern:  ^/test(.*)
             firewall_filter: ~
-            anonymous: true
+            anonymous: ~
+            form_login:
+                login_path: /test/login
+                check_path: /test/login
+                require_previous_session: false
+            logout:
+                path: /test/logout
+                target: /test
 
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
@@ -37,5 +22,8 @@ security:
         in_memory:
             memory:
                 users:
-                    user1: { password: test, roles: [ROLE_USER] }
-                    user2:  { password: test, roles: [ROLE_ADMIN] }
+                    user1: { password: user1, roles: [ROLE_USER] }
+                    user2:  { password: user2, roles: [ROLE_ADMIN] }
+
+    access_control:
+        - { path: ^/test/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

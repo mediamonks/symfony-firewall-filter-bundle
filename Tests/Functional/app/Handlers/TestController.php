@@ -25,4 +25,14 @@ class TestController
     {
         return new Response();
     }
+
+    public function login()
+    {
+        return new Response();
+    }
+
+    public function logout()
+    {
+        return new Response();
+    }
 }

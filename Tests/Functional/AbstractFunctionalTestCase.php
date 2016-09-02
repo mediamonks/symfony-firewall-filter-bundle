@@ -3,40 +3,22 @@
 namespace MediaMonks\FirewallFilterBundle\Tests\Functional;
 
 use MediaMonks\FirewallFilterBundle\Tests\Functional\app\TestKernel;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Mockery as m;
 
 /**
  * Class AbstractFunctionalTestCase in package MediaMonks\FirewallFilterBundle\Tests\DependencyInjection\Functional
  *
  * @author pawel@mediamonks.com
  */
-abstract class AbstractFunctionalTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractFunctionalTestCase extends KernelTestCase
 {
-    protected $testCase;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->deleteTmpDir($this->testCase);
-    }
+    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
     protected function tearDown()
     {
+        $this->assertPostConditions();
         parent::tearDown();
-
-        $this->deleteTmpDir($this->testCase);
-    }
-
-    protected static function deleteTmpDir($testCase)
-    {
-        if (!file_exists($dir = sys_get_temp_dir() . '/' . Kernel::VERSION . '/'.$testCase)) {
-            return;
-        }
-
-        $fs = new Filesystem();
-        $fs->remove($dir);
     }
 
     protected static function getKernelClass()
@@ -49,13 +31,18 @@ abstract class AbstractFunctionalTestCase extends \PHPUnit_Framework_TestCase
     /**
      * @param array $options
      * @return TestKernel
+     * @throws \Exception
      */
-    protected function createKernel(array $options = array())
+    protected static function createKernel(array $options = array())
     {
-        $class = self::getKernelClass();
+        $class = static::getKernelClass();
+
+        if(!isset($options['test_case'])){
+            throw new \Exception('test_case is required');
+        }
 
         return new $class(
-            $this->testCase,
+            $options['test_case'],
             isset($options['root_config']) ? $options['root_config'] : 'config.yml',
             isset($options['environment']) ? $options['environment'] : 'test',
             isset($options['debug']) ? $options['debug'] : true
