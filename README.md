@@ -2,6 +2,10 @@ STILL IN DEVELOPMENT
 
 # MediaMonks Firewall Filter bundle
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mediamonks/symfony-firewall-filter-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mediamonks/symfony-firewall-filter-bundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/mediamonks/symfony-firewall-filter-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mediamonks/symfony-firewall-filter-bundle/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mediamonks/symfony-firewall-filter-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mediamonks/symfony-firewall-filter-bundle/?branch=master)
+
 This bundle adds to *Request* object information about current firewall.
 
 Next to it **FirewallFilter** listener is added.
